@@ -14,7 +14,7 @@
     <div id="menu">
       <div class="hamburger">
         <div class="line1"></div>
-        <div class "line2"></div>
+        <div class="line2"></div>
         <div class="line3"></div>
       </div>
       <div class="search-box">
@@ -66,8 +66,8 @@
           </div>
           <div class="todo-list" data-tasks></div>
           <div class="below-todo">
-            <div class "btns">
-              <button class "add-btn">
+            <div class="btns">
+              <button class="add-btn">
                 <i class="fas fa-plus"></i>
               </button>
               <button
@@ -75,13 +75,62 @@
                 id="clear-btn"
                 data-clear-complete-tasks-button
               >
-                Clear completed tasks <i class "far fa-times-circle"></i>
+                clear completed task  <i class="far fa-times-circle"></i>
               </button>
             </div>
           </div>
         </div>
       </div>
     </section>
+     <div id="modal">
+      <div class="container">
+        <h2>New Task</h2>
+        <div class="close">add new task</div>
+        <form data-new-task-form>
+          <label for="name">Task name</label><br>
+          <input
+            type="text"
+            id="name"
+            data-new-task-input
+            placeholder="Task name"
+            aria-label="Add new task item"
+            autocomplete="off"
+            required
+          /><br />
+          <label for="due-date">Due date</label>
+          <input type="date" id="due-date" name="due-date" /><br />
+          <label for="priority">priority:</label><br>
+          <select name="priority" id="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <br>
+          <label for="description">Description</label><br>
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="6"
+          ></textarea
+          ><br />
+          <input type="submit" />
+        </form>
+      </div>
+    </div>
+
+    <div id="overlay"></div>
+    
+    <template id="task-template">
+      <div class="todo">
+        <div class="task">
+          <div class="todo-content">
+            <input type="checkbox">
+            <label><span class="checkbox"></span></label>
+          </div>
+        </div>
+      </div>
+    </template>
   </body>
   <script src="main.js" defer></script>
 </html>
