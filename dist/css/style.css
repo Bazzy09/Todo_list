@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #menu {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .hamburger .line1,
+  .hamburger .line2,
+  .hamburger .line3 {
+    background-color: #fff;
+    height: 2px;
+    width: 25px;
+    margin: 3px 0;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-box input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  
+  .search-icon {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  #main {
+    display: flex;
+    padding: 20px;
+  }
+  
+  #sidebar {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    width: 300px;
+  }
+  
+  #sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .task-list h3 {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .task-list h3 i {
+    margin-right: 10px;
+  }
+  
+  .new-list {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+  }
+  
+  #up-arrow {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .delete-btn {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  #todos {
+    background-color: #fff;
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .todo-header h2 {
+    font-size: 24px;
+  }
+  
+  .todo-header p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .todo-list {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 100px;
+  }
+  
+  .below-todo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .add-btn,
+  .clear-btn {
+    background-color: #337ab7;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  #modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .close {
+    cursor: pointer;
+    color: #d9534f;
+    font-size: 18px;
+    text-align: right;
+  }
+  
+  form label {
+    margin-top: 10px;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+  }
+  
+  
