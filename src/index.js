@@ -28,3 +28,48 @@ function renderAndSave() {
   localStorage.setItem("task.lists", JSON.stringify(lists));
   localStorage.setItem("task.selectedListId", selectedListId);
 }
+
+function clearElement(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  }
+
+  
+function renderTaskCount(selectedList) {
+    const incompleteTaskCount = selectedList.tasks.filter((task) => !task.complete).length;
+    const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
+    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
+  }
+  
+  function colorTasks(selectedList) {
+    const todos = [...document.querySelectorAll(".todo")];
+    const checkbox = [...document.querySelectorAll(".checkbox")];
+  
+    selectedList.tasks.forEach((task, index) => {
+      if (task.priority === "High") {
+        checkbox[index].style.border = "2px solid #ed1250";
+      } else if (task.priority === "Medium") {
+        checkbox[index].style.border = "2px solid #d3d00f";
+      } else {
+        checkbox[index].style.border = "2px solid #0fc53d";
+      }
+    });
+  }
+  
+  function render() {
+    clearElement(listsContainer);
+    renderLists();
+    const selectedList = lists.find((list) => list.id === selectedListId);
+  
+    if (selectedListId === null) {
+      listDisplayContainer.style.display = "none";
+    } else {
+      listDisplayContainer.style.display = "";
+      listTitleElement.innerHTML = `<i class="fas fa-tasks"></i> ${selectedList.name}`;
+      renderTaskCount(selectedList);
+      clearElement(tasksContainer);
+      renderTasks(selectedList);
+      colorTasks(selectedList);
+    }
+  }
