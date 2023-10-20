@@ -18,3 +18,13 @@ const formContainer = document.querySelector(".container");
 const closeButton = document.querySelector(".close");
 const addButton = document.querySelector(".add-btn");
 const hamburger = document.querySelector(".hamburger");
+
+let lists = JSON.parse(localStorage.getItem("task.lists")) || [];
+let selectedListId = localStorage.getItem("task.selectedListId");
+let modalOpen = false;
+
+function renderAndSave() {
+  render();
+  localStorage.setItem("task.lists", JSON.stringify(lists));
+  localStorage.setItem("task.selectedListId", selectedListId);
+}
