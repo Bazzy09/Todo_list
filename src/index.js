@@ -217,4 +217,27 @@ function editTask(task, label) {
     }
   }
 
-a
+  function closeModal() {
+    formContainer.style.transform = "scale(0)";
+    overlay.style.opacity = 0;
+    modalOpen = false;
+  }
+  
+  listsContainer.addEventListener("click", (e) => {
+    if (e.target.tagName.toLowerCase() === "li") {
+      selectedListId = e.target.dataset.listId;
+      renderAndSave();
+    }
+  });
+  
+  tasksContainer.addEventListener("click", (e) => {
+    if (e.target.tagName.toLowerCase() === "input") {
+      const selectedList = lists.find((list) => list.id === selectedListId);
+      const selectedTask = selectedList.tasks.find(
+        (task) => task.id === e.target.id
+      );
+      selectedTask.complete = e.target.checked;
+      renderAndSave();
+    }
+  });
+  
