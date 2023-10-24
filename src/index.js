@@ -73,3 +73,100 @@ function renderTaskCount(selectedList) {
       colorTasks(selectedList);
     }
   }
+
+  function renderLists() {
+    lists.forEach((list) => {
+      const listElement = document.createElement("li");
+      listElement.innerText = list.name;
+      listElement.dataset.listId = list.id;
+      if (list.id === selectedListId) {
+        listElement.classList.add("active-list");
+      }
+      listsContainer.appendChild(listElement);
+    });
+  }
+  
+  function renderTasks(selectedList) {
+    if (selectedList.tasks.length === 0) {
+      listDisplayContainer.style.backgroundSize = "35%";
+    } else {
+      listDisplayContainer.style.background = "";
+    }
+  
+    selectedList.tasks.forEach((task) => {
+      const taskElement = document.importNode(taskTemplate.content, true);
+      const checkbox = taskElement.querySelector("input");
+      checkbox.id = task.id;
+      checkbox.checked = task.complete;
+      const label = taskElement.querySelector("label");
+      label.htmlFor = task.id;
+  
+      const lineBreak = document.createElement("br");
+      label.append(task.name, ", ", task.date, lineBreak, task.description);
+      const editButton = document.createElement("p");
+      editButton.innerHTML = `<i class="far fa-edit"></i>`;
+      editButton.classList.add("edit");
+      editButton.addEventListener("click", () => editTask(task, label));
+      const todoTask = taskElement.querySelector(".task");
+      todoTask.append(editButton);
+      tasksContainer.appendChild(taskElement);
+    });
+  }
+
+  
+function editTask(task, label) {
+    openOrCloseUpdateTaskForm();
+    newTaskInput.value = task.name;
+    newTaskDate.value = task.date;
+    newTaskPriority.value = task.priority;
+    newTaskDescription.value = task.description;
+  
+    newTaskForm.addEventListener("submit", () => {
+      task.name = newTaskInput.value;
+      task.date = newTaskDate.value;
+      task.priority = newTaskPriority.value;
+      task.description = newTaskDescription.value;
+      label.innerHTML = `<span class="checkbox"></span>${task.name}<br>${task.date}<br>${task.description}`;
+      renderAndSave();
+    });
+  }
+  
+  newListForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const listName = newListInput.value;
+    if (listName === null || listName === "") return;
+    const list = createList();
+    newListInput.value = null;
+    lists.push(list);
+    renderAndSave();
+  });
+  
+  function createList() {
+    return { id: Date.now().toString(), name: newListInput.value, tasks: [] };
+  }
+
+  
+  newTaskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const taskName = newTaskInput.value;
+    const h2 = document.querySelector(".container h2");
+    if (h2.textContent === "Update Task") return;
+    if (taskName === null || taskName === "") return;
+    const task = createTask();
+    newTaskInput.value = null;
+    const selectedList = lists.find((list) => list.id === selectedListId);
+    selectedList.tasks.push(task);
+    renderAndSave();
+  });
+  
+  function createTask() {
+    return {
+      id: Date.now().toString(),
+      name: newTaskInput.value,
+      date: newTaskDate.value,
+      priority: newTaskPriority.value,
+      description: newTaskDescription.value,
+      complete: false,
+    };
+  }
+
