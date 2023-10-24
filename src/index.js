@@ -182,5 +182,22 @@ function editTask(task, label) {
     renderAndSave();
   });
 
-
+  function openOrCloseAddTaskForm() {
+    const h2 = document.querySelector(".container h2");
+    const submitInput = document.querySelector(`input[type="submit"]`);
+  
+    if (modalOpen) {
+      formContainer.style.pointerEvents = "none";
+      formContainer.style.transform = "scale(0)";
+      overlay.style.opacity = 0;
+      modalOpen = false;
+    } else {
+      h2.textContent = "New Task";
+      submitInput.value = "Submit";
+      formContainer.style.pointerEvents = "auto";
+      formContainer.style.transform = "scale(1)";
+      overlay.style.opacity = 1;
+      modalOpen = true;
+    }
+  }
 
