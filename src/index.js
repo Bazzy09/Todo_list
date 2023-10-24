@@ -144,3 +144,29 @@ function editTask(task, label) {
   function createList() {
     return { id: Date.now().toString(), name: newListInput.value, tasks: [] };
   }
+
+  
+  newTaskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const taskName = newTaskInput.value;
+    const h2 = document.querySelector(".container h2");
+    if (h2.textContent === "Update Task") return;
+    if (taskName === null || taskName === "") return;
+    const task = createTask();
+    newTaskInput.value = null;
+    const selectedList = lists.find((list) => list.id === selectedListId);
+    selectedList.tasks.push(task);
+    renderAndSave();
+  });
+  
+  function createTask() {
+    return {
+      id: Date.now().toString(),
+      name: newTaskInput.value,
+      date: newTaskDate.value,
+      priority: newTaskPriority.value,
+      description: newTaskDescription.value,
+      complete: false,
+    };
+  }
+
