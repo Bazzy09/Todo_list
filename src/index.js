@@ -170,3 +170,17 @@ function editTask(task, label) {
     };
   }
 
+  deleteListButton.addEventListener("click", (e) => {
+    lists = lists.filter((list) => list.id !== selectedListId);
+    selectedListId = null;
+    renderAndSave();
+  });
+  
+  clearCompleteTasksButton.addEventListener("click", (e) => {
+    const selectedList = lists.find((list) => list.id === selectedListId);
+    selectedList.tasks = selectedList.tasks.filter((task) => !task.complete);
+    renderAndSave();
+  });
+
+
+
