@@ -35,7 +35,6 @@ function clearElement(element) {
     }
   }
 
-  
 function renderTaskCount(selectedList) {
     const incompleteTaskCount = selectedList.tasks.filter((task) => !task.complete).length;
     const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
@@ -112,8 +111,6 @@ function renderTaskCount(selectedList) {
       tasksContainer.appendChild(taskElement);
     });
   }
-
-  
 function editTask(task, label) {
     openOrCloseUpdateTaskForm();
     newTaskInput.value = task.name;
@@ -201,3 +198,23 @@ function editTask(task, label) {
     }
   }
 
+  function openOrCloseUpdateTaskForm() {
+    const h2 = document.querySelector(".container h2");
+    const submitInput = document.querySelector(`input[type="submit"]`);
+  
+    if (modalOpen) {
+      formContainer.style.pointerEvents = "none";
+      formContainer.style.transform = "scale(0)";
+      overlay.style.opacity = 0;
+      modalOpen = false;
+    } else {
+      h2.textContent = "Update Task";
+      submitInput.value = "Update";
+      formContainer.style.pointerEvents = "auto";
+      formContainer.style.transform = "scale(1)";
+      overlay.style.opacity = 1;
+      modalOpen = true;
+    }
+  }
+
+a
