@@ -27,7 +27,6 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/* HEADER */
 #menu {
   display: flex;
   align-items: center;
@@ -36,7 +35,6 @@ body {
   background: var(--background-secondary);
 }
 
-/* HAMBURGER MENU */
 .hamburger {
   cursor: pointer;
   display: none;
@@ -98,7 +96,6 @@ body {
   display: flex;
 }
 
-/* SIDEBAR AND LIST FORM */
 #sidebar {
   height: 92vh;
   width: 20%;
@@ -209,7 +206,6 @@ body {
   border: 1px solid var(--text-primary);
 }
 
-/* TODO LISTS AND TASKS */
 #todos {
   width: 70%;
   margin-left: 30%;
@@ -341,7 +337,6 @@ body {
   background: var(--background-secondary);
 }
 
-/* Edit icon */
 .edit {
   float: right;
   font-size: 1.4rem;
@@ -355,7 +350,6 @@ body {
   color: var(--background-secondary);
 }
 
-/* MODAL */
 #modal {
   pointer-events: none;
   position: absolute;
