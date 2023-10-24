@@ -60,38 +60,6 @@ body {
   transform: rotate(-45deg) translate(5px, -6px);
 }
 
-/* SEARCH BAR */
-#menu .search-box {
-  margin: 0 auto;
-  position: relative;
-}
-
-#menu .search-icon {
-  position: relative;
-  color: #333;
-  right: 4rem;
-  font-size: 1.5rem;
-  z-index: 1;
-}
-
-#menu .search-box input {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.4rem;
-  width: calc(20rem + 20vw);
-  height: 4rem;
-  border: none;
-  outline: none;
-  border-radius: 0.4rem;
-  padding: 0 1rem;
-  background: #e4e4e4;
-  transition: 0.3s ease;
-}
-
-#menu .search-box input:focus {
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-  background: var(--background-primary);
-}
-
 #main {
   display: flex;
 }
