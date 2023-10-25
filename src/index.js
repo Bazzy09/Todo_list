@@ -240,4 +240,31 @@ function editTask(task, label) {
       renderAndSave();
     }
   });
+
+  addButton.addEventListener("click", () => {
+    newTaskForm.reset();
+    openOrCloseAddTaskForm();
+  
+    if (modalOpen) {
+      addButton.style.background = "#2185d5";
+      addButton.style.transform = "rotate(45deg)";
+    } else {
+      addButton.style.background = "transparent";
+      addButton.style.transform = "rotate(0)";
+    }
+  });
+  
+  closeButton.addEventListener("click", () => {
+    closeModal();
+    addButton.style.background = "transparent";
+    addButton.style.transform = "rotate(0)";
+  });
+  
+  formContainer.addEventListener("submit", (e) => {
+    e.preventDefault();
+    openOrCloseAddTaskForm();
+    addButton.style.background = "transparent";
+    addButton.style.transform = "rotate(0)";
+    modalOpen = false;
+  });
   
