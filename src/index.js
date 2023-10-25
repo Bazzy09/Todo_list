@@ -24,7 +24,6 @@ let selectedListId = localStorage.getItem("task.selectedListId");
 let modalOpen = false;
 
 function renderAndSave() {
-  render();
   localStorage.setItem("task.lists", JSON.stringify(lists));
   localStorage.setItem("task.selectedListId", selectedListId);
 }
@@ -267,4 +266,24 @@ function editTask(task, label) {
     addButton.style.transform = "rotate(0)";
     modalOpen = false;
   });
+   
+  hamburger.addEventListener("click", () => {
+    const sidebar = document.querySelector("#sidebar");
+    sidebar.classList.toggle("active");
+    hamburger.classList.toggle("clicked");
+  });
   
+  render();
+  
+  export {
+    lists,
+    selectedListId,
+    clearElement,
+    listsContainer,
+    renderLists,
+    listDisplayContainer,
+    listTitleElement,
+    tasksContainer,
+    taskTemplate,
+    editTask,
+  };
