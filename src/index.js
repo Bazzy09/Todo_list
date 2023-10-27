@@ -24,7 +24,6 @@ let selectedListId = localStorage.getItem("task.selectedListId");
 let modalOpen = false;
 
 function renderAndSave() {
-  render();
   localStorage.setItem("task.lists", JSON.stringify(lists));
   localStorage.setItem("task.selectedListId", selectedListId);
 }
@@ -35,7 +34,6 @@ function clearElement(element) {
     }
   }
 
-  
 function renderTaskCount(selectedList) {
     const incompleteTaskCount = selectedList.tasks.filter((task) => !task.complete).length;
     const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
@@ -112,8 +110,6 @@ function renderTaskCount(selectedList) {
       tasksContainer.appendChild(taskElement);
     });
   }
-
-  
 function editTask(task, label) {
     openOrCloseUpdateTaskForm();
     newTaskInput.value = task.name;
@@ -170,3 +166,124 @@ function editTask(task, label) {
     };
   }
 
+  deleteListButton.addEventListener("click", (e) => {
+    lists = lists.filter((list) => list.id !== selectedListId);
+    selectedListId = null;
+    renderAndSave();
+  });
+  
+  clearCompleteTasksButton.addEventListener("click", (e) => {
+    const selectedList = lists.find((list) => list.id === selectedListId);
+    selectedList.tasks = selectedList.tasks.filter((task) => !task.complete);
+    renderAndSave();
+  });
+
+  function openOrCloseAddTaskForm() {
+    const h2 = document.querySelector(".container h2");
+    const submitInput = document.querySelector(`input[type="submit"]`);
+  
+    if (modalOpen) {
+      formContainer.style.pointerEvents = "none";
+      formContainer.style.transform = "scale(0)";
+      overlay.style.opacity = 0;
+      modalOpen = false;
+    } else {
+      h2.textContent = "New Task";
+      submitInput.value = "Submit";
+      formContainer.style.pointerEvents = "auto";
+      formContainer.style.transform = "scale(1)";
+      overlay.style.opacity = 1;
+      modalOpen = true;
+    }
+  }
+
+  function openOrCloseUpdateTaskForm() {
+    const h2 = document.querySelector(".container h2");
+    const submitInput = document.querySelector(`input[type="submit"]`);
+  
+    if (modalOpen) {
+      formContainer.style.pointerEvents = "none";
+      formContainer.style.transform = "scale(0)";
+      overlay.style.opacity = 0;
+      modalOpen = false;
+    } else {
+      h2.textContent = "Update Task";
+      submitInput.value = "Update";
+      formContainer.style.pointerEvents = "auto";
+      formContainer.style.transform = "scale(1)";
+      overlay.style.opacity = 1;
+      modalOpen = true;
+    }
+  }
+
+  function closeModal() {
+    formContainer.style.transform = "scale(0)";
+    overlay.style.opacity = 0;
+    modalOpen = false;
+  }
+  
+  listsContainer.addEventListener("click", (e) => {
+    if (e.target.tagName.toLowerCase() === "li") {
+      selectedListId = e.target.dataset.listId;
+      renderAndSave();
+    }
+  });
+  
+  tasksContainer.addEventListener("click", (e) => {
+    if (e.target.tagName.toLowerCase() === "input") {
+      const selectedList = lists.find((list) => list.id === selectedListId);
+      const selectedTask = selectedList.tasks.find(
+        (task) => task.id === e.target.id
+      );
+      selectedTask.complete = e.target.checked;
+      renderAndSave();
+    }
+  });
+
+  addButton.addEventListener("click", () => {
+    newTaskForm.reset();
+    openOrCloseAddTaskForm();
+  
+    if (modalOpen) {
+      addButton.style.background = "#2185d5";
+      addButton.style.transform = "rotate(45deg)";
+    } else {
+      addButton.style.background = "transparent";
+      addButton.style.transform = "rotate(0)";
+    }
+  });
+  
+  closeButton.addEventListener("click", () => {
+    closeModal();
+    addButton.style.background = "transparent";
+    addButton.style.transform = "rotate(0)";
+  });
+  
+  formContainer.addEventListener("submit", (e) => {
+    e.preventDefault();
+    openOrCloseAddTaskForm();
+    addButton.style.background = "transparent";
+    addButton.style.transform = "rotate(0)";
+    modalOpen = false;
+  });
+   
+  hamburger.addEventListener("click", () => {
+    const sidebar = document.querySelector("#sidebar");
+    sidebar.classList.toggle("active");
+    hamburger.classList.toggle("clicked");
+  });
+  
+  render();
+  
+  export {
+    lists,
+    selectedListId,
+    clearElement,
+    listsContainer,
+    renderLists,
+    listDisplayContainer,
+    listTitleElement,
+    tasksContainer,
+    taskTemplate,
+    editTask,
+  };
